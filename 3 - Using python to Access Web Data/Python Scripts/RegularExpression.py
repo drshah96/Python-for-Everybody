@@ -116,6 +116,7 @@ y = re.findall('^F.+:', x)
 print(y)
 
 ##### Graded Assignment #####
+## Extracting numbers from Text File and Summing up ##
 import re
 
 source1 = '/Users/dhruvinshah96/Documents/Programming Practice/Python/Coursera/Python for Everybody/3 - Using python to Access Web Data/Python Scripts/Data/regex_sum_42.txt'
