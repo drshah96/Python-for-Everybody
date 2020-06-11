@@ -1,11 +1,11 @@
-# Sockets
+### Sockets
 import socket
 
 mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 mysock.connect(('data.pr4e.org', 80))
 mysock.close()
 
-# An HTTP Request in fetching File Python
+### An HTTP Request in fetching File Python
 import socket
 
 mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -16,6 +16,7 @@ mysock.send(cmd)
 count = 0
 text = b""
 
+# Loop to read Txt File
 while True:
     data = mysock.recv(512)
     if (len(data) < 1): break
@@ -23,10 +24,12 @@ while True:
     text = text + data
 mysock.close()
 
+#End of Header
 pos = text.find(b"\r\n\r\n")
 print('Header Length: ', pos)
 print(text[:pos].decode())
 
+#Saving the File after skipping header
 text = text[pos + 4:]
 path = '/Users/dhruvinshah96/Documents/Programming Practice/Python/Coursera/Python for Everybody/3 - Using python to Access Web Data/Output/'
 fname = path + 'OutputFile.txt'
@@ -34,7 +37,7 @@ fhand = open(fname, "wb")
 fhand.write(text)
 fhand.close()
 
-# Retriving an image over HTTP
+### Retriving an image over HTTP
 import socket
 
 HOST = 'data.pr4e.org'
@@ -47,6 +50,7 @@ mysock.sendall(cmd)
 count = 0
 picture = b""
 
+#Loop to read Picture
 while True:
     data = mysock.recv(5120)
     if len(data) < 1: break
@@ -56,13 +60,34 @@ while True:
 
 mysock.close()
 
+#End of Header
 pos = picture.find(b"\r\n\r\n")
 print('Header Length: ', pos)
 print(picture[:pos].decode())
 
+# Saving the File after skipping header
 picture = picture[pos + 4:]
 path = '/Users/dhruvinshah96/Documents/Programming Practice/Python/Coursera/Python for Everybody/3 - Using python to Access Web Data/Output/'
 fname = path + 'OutputImage.jpg'
 fhand = open(fname, "wb")
 fhand.write(picture)
 fhand.close()
+
+### Gradable Assignment
+import socket
+
+mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+mysock.connect(('data.pr4e.org', 80))
+cmd = 'GET http://data.pr4e.org/intro-short.txt HTTP/1.0\r\n\r\n'.encode()
+mysock.send(cmd)
+
+count = 0
+# text = b""
+
+# Loop to read Txt File
+while True:
+    data = mysock.recv(512)
+    if (len(data) < 1): break
+    print(data.decode())
+#    text = text + data
+mysock.close()
