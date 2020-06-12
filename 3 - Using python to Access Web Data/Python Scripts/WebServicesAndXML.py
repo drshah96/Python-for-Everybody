@@ -62,4 +62,39 @@ for item in lst:
     print('ID', item.find('id').text)
     print('Attribute', item.get("x"))
 
-###
+### Graded Assignment
+import urllib.request, urllib.error
+import xml.etree.ElementTree as ET
+import ssl
+
+serviceurl = 'http://py4e-data.dr-chuck.net/comments_445371.xml?'
+
+# Ignore SSL certificate errors
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+url = serviceurl
+print('Retrieving', url)
+uh = urllib.request.urlopen(url, context=ctx)
+
+count = 0
+sum = 0
+data = uh.read()
+
+print('Retrieved', len(data), 'characters')
+# print(data.decode())
+tree = ET.fromstring(data)
+lst = tree.findall('comments/comment')
+print('User count: ', len(lst))
+
+for item in lst:
+    count = count + 1
+    # print('Name', item.find('name').text)
+    # print('Count', item.find('count').text)
+    sum = sum + int(item.find('count').text)
+
+# print(count)
+print(sum)
+# results = tree.findall('result')
+# print('Count:', tree.find('count').text)
