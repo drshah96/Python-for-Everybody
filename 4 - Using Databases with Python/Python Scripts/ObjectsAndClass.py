@@ -36,3 +36,24 @@ an.Party()
 an.Party()
 an = 42
 print('an contains: ', an)
+
+
+### Instance Variables
+class PartyAnimal:
+    x = 0
+    name = ""
+
+    def __init__(self, z):
+        self.name = z
+        print(self.name, "Constructed")
+
+    def Party(self):
+        self.x = self.x + 1
+        print(self.name, "party count", self.x)
+
+
+s = PartyAnimal("Sally")
+s.Party()
+j = PartyAnimal("Jim")
+j.Party()
+s.Party()
