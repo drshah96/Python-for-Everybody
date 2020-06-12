@@ -57,3 +57,34 @@ s.Party()
 j = PartyAnimal("Jim")
 j.Party()
 s.Party()
+
+
+### Object Inheritance
+class PartyAnimal:
+    x = 0
+    name = ""
+
+    def __init__(self, z):
+        self.name = z
+        print(self.name, "Constructed")
+
+    def Party(self):
+        self.x = self.x + 1
+        print(self.name, "party count", self.x)
+
+
+class FootballFan(PartyAnimal):
+    points = 0
+
+    def touchdown(self):
+        self.points = self.points + 7
+        self.Party()
+        print(self.name, "points", self.points)
+
+
+print("=======================================")
+s = PartyAnimal("Sally")
+s.Party()
+j = FootballFan("Jim")
+j.Party()
+j.touchdown()
