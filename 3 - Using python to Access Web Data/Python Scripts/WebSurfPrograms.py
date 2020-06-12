@@ -75,3 +75,73 @@ tags = '<p>Please click <a href="http://www.dr-chuck.com">here</a></p>'
 y = re.findall('(.+)', tags)
 print(y)
 # http://www.dr-chuck.com
+
+### Graded Assignment 1
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import ssl
+
+# Ignore SSL certificate errors
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+url = 'http://py4e-data.dr-chuck.net/comments_445369.html'
+html = urlopen(url, context=ctx).read()
+soup = BeautifulSoup(html, "html.parser")
+count = 0
+b = list()
+sum = 0
+# Retrieve all of the anchor tags
+tags = soup('span')
+for tag in tags:
+    # Look at the parts of a tag
+    # print('TAG:', tag)
+    # print('URL:', tag.get('href', None))
+    # print('Contents:', tag.contents[0])
+    # print('Attrs:', tag.attrs)
+    # type(tag.contents)
+    # sum = sum + tag.contents[0]
+    # b.append(tag.contents[0])
+    b.append(tag.contents[0])
+    count = count + 1
+print(count)
+print(b)
+b = list(map(int, b))
+print(b)
+for element in b:
+    sum = sum + element
+print(sum)
+
+### Graded Assignment 2
+import urllib.error
+from bs4 import BeautifulSoup
+import ssl
+
+# Ignore SSL certificate errors
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+url = "http://py4e-data.dr-chuck.net/known_by_Marin.html"
+postion = int(input("Enter Position: "))
+count = int(input("Enter Count: "))
+count = count + 1
+
+while (int(count) != 0):
+    print("Retrieving: ", url)
+    html = urllib.request.urlopen(url, context=ctx).read()
+    soup = BeautifulSoup(html, 'html.parser')
+    pos = 1
+
+    # Retrieve all of the anchor tags
+    tags = soup('a')
+    for tag in tags:
+        if (pos == int(postion)):
+            # print("Retrieving: " ,pos, tag.get('href', None))
+            url = tag.get('href', None)
+            break
+        # print(pos, tag.get('href', None))
+        pos = pos + 1
+
+    count = count - 1
