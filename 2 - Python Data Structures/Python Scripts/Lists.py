@@ -175,7 +175,7 @@ print(b)
 ##### Graded Assignment 2 #####
 
 fname = input("Enter file name: ")
-if len(fname) < 1: fname = "mbox-short.txt"
+if len(fname) < 1: fname = "Data/mbox-short.txt"
 
 fh = open(fname)
 count = 0
